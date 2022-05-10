@@ -5,9 +5,9 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:chatting_app/cache_helper.dart';
 import 'package:chatting_app/main.dart';
-import 'package:chatting_app/social_layout.dart';
+import 'package:chatting_app/shared/cache_helper.dart';
+import 'package:chatting_app/social_layout/social_layout.dart';
 import 'package:chatting_app/social_login/social_login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -19,7 +19,7 @@ void main() {
     var uId = CacheHelper.getData(key: 'uId');
 
     if (uId != null) {
-      widget = SocialLayout();
+      widget = const SocialLayout();
     } else {
       widget = LoginScreen();
     }

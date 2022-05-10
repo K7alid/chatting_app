@@ -4,7 +4,10 @@ class SocialUserModel {
   late String phone;
   late String password;
   late String uId;
-  late bool isEmailVerified;
+  late String image;
+  late String coverImage;
+  late String bio;
+  bool isEmailVerified = false;
 
   SocialUserModel({
     required this.email,
@@ -12,6 +15,9 @@ class SocialUserModel {
     required this.password,
     required this.phone,
     required this.uId,
+    required this.image,
+    required this.coverImage,
+    required this.bio,
     required this.isEmailVerified,
   });
 
@@ -21,6 +27,10 @@ class SocialUserModel {
     phone = json['phone'];
     password = json['password'];
     uId = json['uId'];
+    image = json['image'];
+    coverImage = json['coverImage'];
+    bio = json['bio'];
+    isEmailVerified = json['isEmailVerified'];
   }
 
   Map<String, dynamic> toMap() {
@@ -30,6 +40,10 @@ class SocialUserModel {
       'email': email,
       'password': password,
       'uId': uId,
+      'bio': bio,
+      'image': image,
+      'coverImage': coverImage,
+      'isEmailVerified': isEmailVerified,
     };
   }
 }

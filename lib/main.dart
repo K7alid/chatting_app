@@ -1,10 +1,14 @@
-import 'package:bloc/bloc.dart';
-import 'package:chatting_app/bloc_observer.dart';
-import 'package:chatting_app/cache_helper.dart';
-import 'package:chatting_app/social_layout.dart';
+import 'package:chatting_app/shared/bloc_observer.dart';
+import 'package:chatting_app/shared/cache_helper.dart';
+import 'package:chatting_app/shared/constants.dart';
+import 'package:chatting_app/shared/themes.dart';
+import 'package:chatting_app/social_layout/cubit/cubit.dart';
+import 'package:chatting_app/social_layout/cubit/states.dart';
+import 'package:chatting_app/social_layout/social_layout.dart';
 import 'package:chatting_app/social_login/social_login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,10 +17,10 @@ void main() async {
   // bool? isDark = CacheHelper.getBoolean(
   //   key: 'isDark',
   // );
+  //token = CacheHelper.getData(key: 'token');
   await CacheHelper.init();
-  CacheHelper.init();
   Widget widget;
-  var uId = CacheHelper.getData(key: 'uId');
+  uId = CacheHelper.getData(key: 'uId');
   if (uId != null) {
     widget = SocialLayout();
   } else {
@@ -40,19 +44,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
-        appBarTheme: const AppBarTheme(
-          elevation: 0,
-          backgroundColor: Colors.white,
-          iconTheme: const IconThemeData(
-            color: Colors.black,
-          ),
-        ),
+    return BlocProvider(
+      create: (BuildContext context) => SocialCubit()
+        ..getUserData()
+        ..getPosts(),
+      child: BlocConsumer<SocialCubit, SocialStates>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: lightTheme,
+            home: startWidget,
+          );
+        },
       ),
-      home: LoginScreen(),
     );
   }
 }

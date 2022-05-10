@@ -1,6 +1,6 @@
-import 'package:chatting_app/cache_helper.dart';
-import 'package:chatting_app/components.dart';
-import 'package:chatting_app/social_layout.dart';
+import 'package:chatting_app/shared/cache_helper.dart';
+import 'package:chatting_app/shared/components.dart';
+import 'package:chatting_app/social_layout/social_layout.dart';
 import 'package:chatting_app/social_login/cubit/cubit.dart';
 import 'package:chatting_app/social_login/cubit/states.dart';
 import 'package:chatting_app/social_register/social_register_screen.dart';

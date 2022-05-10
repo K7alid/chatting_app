@@ -1,5 +1,5 @@
-import 'package:chatting_app/components.dart';
-import 'package:chatting_app/social_layout.dart';
+import 'package:chatting_app/shared/components.dart';
+import 'package:chatting_app/social_layout/social_layout.dart';
 import 'package:chatting_app/social_register/cubit/cubit.dart';
 import 'package:chatting_app/social_register/cubit/states.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
