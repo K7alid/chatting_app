@@ -16,7 +16,8 @@ class FeedsScreen extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         return ConditionalBuilder(
-          condition: SocialCubit.get(context).posts.isNotEmpty,
+          condition: SocialCubit.get(context).posts.isNotEmpty &&
+              SocialCubit.get(context).userModel != null,
           builder: (context) => SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Column(
@@ -33,7 +34,8 @@ class FeedsScreen extends StatelessWidget {
                         height: 200,
                         fit: BoxFit.cover,
                         image: NetworkImage(
-                            'https://img.freepik.com/free-photo/young-student-woman-with-backpack-bag-holding-hand-with-thumb-up-gesture-isolated-white-wall_231208-11498.jpg?w=996&t=st=1651713444~exp=1651714044~hmac=3973ee436eb04f11df18c0a1457e70a3d1eaeb4894685e1130c6d0dbdf1dd163'),
+                          'https://img.freepik.com/free-vector/young-people-standing-talking-each-other-speech-bubble-smartphone-girl-flat-vector-illustration-communication-discussion_74855-8741.jpg?t=st=1652312897~exp=1652313497~hmac=ad479b6a1bd85a75704a93f79afe90531f419ddfd9b83349744bb36098947d73&w=1060',
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -68,7 +70,12 @@ class FeedsScreen extends StatelessWidget {
     );
   }
 
-  Widget buildPostItem(PostModel model, context, index) => Card(
+  Widget buildPostItem(
+    PostModel model,
+    context,
+    index,
+  ) =>
+      Card(
         margin: const EdgeInsets.symmetric(horizontal: 8.0),
         clipBehavior: Clip.antiAliasWithSaveLayer,
         elevation: 7.0,
@@ -82,7 +89,7 @@ class FeedsScreen extends StatelessWidget {
                   CircleAvatar(
                     radius: 27,
                     backgroundImage: NetworkImage(
-                      SocialCubit.get(context).userModel!.image,
+                      model.image,
                     ),
                   ),
                   const SizedBox(

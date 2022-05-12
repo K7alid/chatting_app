@@ -5,6 +5,7 @@ import 'package:chatting_app/bottomNavBar_%20screens/feeds_screen.dart';
 import 'package:chatting_app/bottomNavBar_%20screens/new_post_screen.dart';
 import 'package:chatting_app/bottomNavBar_%20screens/settings_screen.dart';
 import 'package:chatting_app/bottomNavBar_%20screens/users_screen.dart';
+import 'package:chatting_app/models/message_model.dart';
 import 'package:chatting_app/models/post_%20model.dart';
 import 'package:chatting_app/models/social_user_model.dart';
 import 'package:chatting_app/shared/constants.dart';
@@ -338,5 +339,68 @@ class SocialCubit extends Cubit<SocialStates> {
         emit(SocialGetAllUsersErrorState(error.toString()));
       });
     }
+  }
+
+  void sendMessage({
+    required text,
+    required dateTime,
+    required receiverId,
+  }) {
+    MessageModel model = MessageModel(
+      dateTime: dateTime,
+      senderId: userModel!.uId,
+      receiverId: receiverId,
+      text: text,
+    );
+
+    //to me
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(userModel!.uId)
+        .collection('chats')
+        .doc(receiverId)
+        .collection('messages')
+        .add(model.toMap())
+        .then((value) {
+      emit(SocialSendMessageSuccessState());
+    }).catchError((error) {
+      emit(SocialSendMessageErrorState());
+    });
+
+    //to receiver
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(receiverId)
+        .collection('chats')
+        .doc(userModel!.uId)
+        .collection('messages')
+        .add(model.toMap())
+        .then((value) {
+      emit(SocialSendMessageSuccessState());
+    }).catchError((error) {
+      emit(SocialSendMessageErrorState());
+    });
+  }
+
+  List<MessageModel> messages = [];
+
+  void getMessages({
+    required String receiverId,
+  }) {
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(userModel!.uId)
+        .collection('chats')
+        .doc(receiverId)
+        .collection('messages')
+        .orderBy('dateTime')
+        .snapshots()
+        .listen((event) {
+      messages = [];
+      event.docs.forEach((element) {
+        messages.add(MessageModel.fromJson(element.data()));
+      });
+      emit(SocialGetMessagesSuccessState());
+    });
   }
 }

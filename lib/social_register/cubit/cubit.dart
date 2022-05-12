@@ -52,10 +52,10 @@ class SocialRegisterCubit extends Cubit<SocialRegisterStates> {
       phone: phone,
       uId: uId,
       coverImage:
-          'https://img.freepik.com/free-photo/dogs-enjoying-beautiful-view-hot-balloons-sky-during-sunset-cappadocia-turkey_181624-23905.jpg?t=st=1651818715~exp=1651819315~hmac=d4bf69ba345885c58778568f90b0c07fe90919d495867a85ec805d067555658d&w=996',
+          'https://www.baytekent.com/wp-content/uploads/2016/12/facebook-default-no-profile-pic1.jpg',
       bio: 'Write your bio....',
       image:
-          'https://img.freepik.com/free-vector/illustration-concept-young-man-who-lost-his-zest-life_10045-682.jpg?w=740&t=st=1651805504~exp=1651806104~hmac=7e797c95e4a26f56a54351dac2507c3d461dfb1df9e8f00c68fe6eeb2430bcd5',
+          'https://www.baytekent.com/wp-content/uploads/2016/12/facebook-default-no-profile-pic1.jpg',
       isEmailVerified: false,
     );
 

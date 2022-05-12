@@ -93,3 +93,10 @@ class SocialPostImageErrorState extends SocialStates {}
 
 //remove post image
 class SocialRemovePostImageState extends SocialStates {}
+
+//messages
+class SocialSendMessageSuccessState extends SocialStates {}
+
+class SocialSendMessageErrorState extends SocialStates {}
+
+class SocialGetMessagesSuccessState extends SocialStates {}

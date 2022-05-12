@@ -47,7 +47,7 @@ class ChatsScreen extends StatelessWidget {
               CircleAvatar(
                 radius: 27,
                 backgroundImage: NetworkImage(
-                  SocialCubit.get(context).userModel!.image,
+                  model.image,
                 ),
               ),
               const SizedBox(
